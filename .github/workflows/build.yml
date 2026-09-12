@@ -1,0 +1,49 @@
+name: Build Platinum Toolkit
+
+# Runs on a real Windows machine that GitHub provides for free - nothing
+# builds on your own PC. Trigger it manually from the Actions tab, or it
+# runs automatically on every push to main.
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Set up .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # WinUI 3 / MSIX projects need the Windows SDK build tools that come
+      # with the "Microsoft.Windows.SDK.BuildTools" NuGet package (already
+      # referenced in the .csproj), so a plain `dotnet restore` covers it -
+      # no extra workload install needed on the runner.
+      - name: Restore
+        run: dotnet restore PlatinumToolkit.sln
+
+      - name: Build (unpackaged, so it produces a plain .exe)
+        run: >
+          msbuild PlatinumToolkit\PlatinumToolkit.csproj
+          /p:Configuration=Release
+          /p:Platform=x64
+          /p:WindowsPackageType=None
+          /p:WindowsAppSDKSelfContained=true
+          /p:SelfContained=true
+          /p:RuntimeIdentifier=win-x64
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: PlatinumToolkit-win-x64
+          path: PlatinumToolkit/bin/x64/Release/net8.0-windows10.0.19041.0/win-x64/**
+          if-no-files-found: error
