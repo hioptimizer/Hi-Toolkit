@@ -1,0 +1,79 @@
+<Page
+    x:Class="PlatinumToolkit.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel Margin="32,24,32,24" Spacing="16" MaxWidth="1100" HorizontalAlignment="Left">
+
+            <StackPanel Spacing="4">
+                <TextBlock Text="Home" FontSize="28" FontWeight="SemiBold" />
+                <TextBlock x:Name="GreetingText"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+
+            <!-- Quick links row - fill in real URLs/handlers once you have them -->
+            <ItemsControl>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="12" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Items>
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8" Padding="16" Width="220" Height="120">
+                        <StackPanel Spacing="6" VerticalAlignment="Center">
+                            <FontIcon Glyph="&#xE895;" FontSize="24" />
+                            <TextBlock Text="Update Notes" FontWeight="SemiBold" />
+                            <TextBlock Text="What's changed recently"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       FontSize="12" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8" Padding="16" Width="220" Height="120">
+                        <StackPanel Spacing="6" VerticalAlignment="Center">
+                            <FontIcon Glyph="&#xE774;" FontSize="24" />
+                            <TextBlock Text="Source" FontWeight="SemiBold" />
+                            <TextBlock Text="Link this to your own repo"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       FontSize="12" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            CornerRadius="8" Padding="16" Width="220" Height="120">
+                        <StackPanel Spacing="6" VerticalAlignment="Center">
+                            <FontIcon Glyph="&#xE8F2;" FontSize="24" />
+                            <TextBlock Text="Support" FontWeight="SemiBold" />
+                            <TextBlock Text="Link this to your own community"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                       FontSize="12" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </ItemsControl.Items>
+            </ItemsControl>
+
+            <!-- Category summary - real counts, computed from TweaksData -->
+            <TextBlock Text="Category Status" FontSize="18" FontWeight="SemiBold" Margin="0,8,0,0" />
+            <ItemsControl x:Name="CategorySummaryList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                CornerRadius="8" Padding="16,12" Margin="0,0,0,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="{Binding Counts}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,55 @@
+<Page
+    x:Class="PlatinumToolkit.Pages.TweakCategoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PlatinumToolkit">
+
+    <ScrollViewer>
+        <StackPanel Margin="32,24,32,24" Spacing="4" MaxWidth="900" HorizontalAlignment="Left">
+            <TextBlock x:Name="CategoryTitle" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock x:Name="CategorySubtitle"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       Margin="0,0,0,16" />
+
+            <ItemsControl x:Name="TweaksList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="local:TweakItem">
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                CornerRadius="8"
+                                Padding="16,12"
+                                Margin="0,0,0,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Spacing="2" VerticalAlignment="Center">
+                                    <TextBlock Text="{x:Bind DisplayName}"
+                                               FontWeight="SemiBold"
+                                               FontSize="14" />
+                                    <TextBlock Text="{x:Bind Description}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                               FontSize="12"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <ToggleSwitch Grid.Column="1"
+                                              IsOn="{x:Bind IsEnabled, Mode=TwoWay}"
+                                              OnContent=""
+                                              OffContent=""
+                                              Toggled="Tweak_Toggled" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock x:Name="EmptyState"
+                       Text="No tweaks in this category yet - send them over and I'll wire them in."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       Visibility="Collapsed"
+                       Margin="0,24,0,0" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

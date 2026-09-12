@@ -1,0 +1,11 @@
+<Page
+    x:Class="PlatinumToolkit.Pages.TroubleshootingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel Margin="32,24,32,24" Spacing="4" HorizontalAlignment="Left">
+        <TextBlock Text="Troubleshooting" FontSize="28" FontWeight="SemiBold" />
+        <TextBlock Text="Not built out yet - this is a placeholder page ready for you to fill in."
+                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+    </StackPanel>
+</Page>
